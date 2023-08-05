@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 final ThemeData appTheme = ThemeData(
   primarySwatch: Colors.brown,
-  accentColor: Colors.orangeAccent,
   textTheme: TextTheme(
     headline1: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
     headline2: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -10,9 +9,6 @@ final ThemeData appTheme = ThemeData(
   ),
   appBarTheme: AppBarTheme(
     centerTitle: true,
-    textTheme: TextTheme(
-      headline6: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-    ),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
