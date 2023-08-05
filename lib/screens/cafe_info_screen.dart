@@ -12,7 +12,7 @@ class CafeInfoScreen extends StatelessWidget {
 
   Widget buildCafeImage(BuildContext context) {
     if (cafe.photos.isNotEmpty) {
-      final String apiKey = 'AIzaSyBsDHGQOJMaCjubsXeUCksfDTCGbQC1Y4U'; // Put your Google Maps API Key here
+      final String apiKey = ''; // Put your Google Maps API Key here
       final String imageUrl =
           'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${cafe.photos[0]}&key=$apiKey';
 

@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 class CafeService {
   // Replace this with your actual API key
-  final String apiKey = 'AIzaSyBsDHGQOJMaCjubsXeUCksfDTCGbQC1Y4U';
+  final String apiKey = '';
 
   double computeDistance(double lat1, double lon1, double lat2, double lon2) {
     const R = 6371e3; // Earth radius in meters
