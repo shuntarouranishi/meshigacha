@@ -11,7 +11,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      # Flutter SDKの手動セットアップ
+      - name: Manual Setup Flutter
+        run: |
+          git clone https://github.com/flutter/flutter.git -b stable
+          echo "$GITHUB_WORKSPACE/flutter/bin" >> $GITHUB_PATH
+
+      # 依存関係のインストール
+      - name: Install dependencies
+        run: flutter pub get
+
+      # Flutter Webアプリのビルド
       - run: flutter build web
+
+      # Firebase Hostingへのデプロイ
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
