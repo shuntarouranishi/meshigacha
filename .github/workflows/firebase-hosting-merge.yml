@@ -15,9 +15,13 @@ jobs:
         with:
           flutter-version: '2.x'
 
-      # Flutterのパスを追加
-      - name: Add Flutter to PATH
-        run: echo "$GITHUB_WORKSPACE/flutter/bin" >> $GITHUB_PATH
+      # Flutterの環境変数を設定
+      - name: Set Flutter environment variables
+        run: echo "FLUTTER_HOME=/opt/hostedtoolcache/flutter/$(flutter --version --machine | jq -r .flutterVersion)/x64" >> $GITHUB_ENV
+
+      # Flutterのバージョンを確認
+      - name: Check Flutter version
+        run: flutter --version
 
       # 依存関係のインストール
       - name: Install dependencies
