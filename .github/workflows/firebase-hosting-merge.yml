@@ -9,11 +9,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # Flutter SDKの手動セットアップ
+      # Flutter SDKのセットアップ
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '2.x'
+          flutter-version: '2.5.0'  # ここでバージョンを明示的に指定
 
       # 依存関係のインストール
       - name: Install dependencies
