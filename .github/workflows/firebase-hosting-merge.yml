@@ -13,14 +13,15 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '2.5.0'  # ここでバージョンを明示的に指定
+          flutter-version: '2.x'
 
       # 依存関係のインストール
       - name: Install dependencies
         run: flutter pub get
 
       # Flutter Webアプリのビルド
-      - run: flutter build web
+      - name: Build Flutter Web App
+        run: flutter build web
 
       # Firebase Hostingへのデプロイ
       - uses: FirebaseExtended/action-hosting-deploy@v0
