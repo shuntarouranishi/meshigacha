@@ -9,27 +9,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # Flutter SDKのセットアップ
+      # Flutter SDKの手動セットアップ
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '2.x'
-
-      # Flutterの環境変数を設定
-      - name: Set Flutter environment variables
-        run: echo "FLUTTER_HOME=/opt/hostedtoolcache/flutter/$(flutter --version --machine | jq -r .flutterVersion)/x64" >> $GITHUB_ENV
-
-      # Flutterのバージョンを確認
-      - name: Check Flutter version
-        run: flutter --version
 
       # 依存関係のインストール
       - name: Install dependencies
         run: flutter pub get
 
       # Flutter Webアプリのビルド
-      - name: Build Flutter Web App
-        run: flutter build web
+      - run: flutter build web
 
       # Firebase Hostingへのデプロイ
       - uses: FirebaseExtended/action-hosting-deploy@v0
