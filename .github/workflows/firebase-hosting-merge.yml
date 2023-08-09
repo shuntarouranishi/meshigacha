@@ -11,7 +11,7 @@ jobs:
 
       # Flutter SDKの手動セットアップ
       - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+        uses: subosito/flutter-action@v3
         with:
           flutter-version: '3.10.6'
 
