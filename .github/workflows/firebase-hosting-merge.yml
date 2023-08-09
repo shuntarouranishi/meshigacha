@@ -12,9 +12,10 @@ jobs:
       # Flutter SDKのセットアップ
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.10.6'
 
+      # Flutterのバイナリへのパスを追加
+      - name: Add Flutter to PATH
+        run: echo "$GITHUB_WORKSPACE/flutter/bin" >> $GITHUB_PATH
 
       # 依存関係のインストール
       - name: Install dependencies
