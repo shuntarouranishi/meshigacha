@@ -9,20 +9,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # Flutter SDKのセットアップ
+      # Flutter SDKの手動セットアップ
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.10.6'
-
+          flutter-version: '2.x'
 
       # 依存関係のインストール
       - name: Install dependencies
         run: flutter pub get
 
       # Flutter Webアプリのビルド
-      - name: Build Flutter Web App
-        run: flutter build web
+      - run: flutter build web
 
       # Firebase Hostingへのデプロイ
       - uses: FirebaseExtended/action-hosting-deploy@v0
