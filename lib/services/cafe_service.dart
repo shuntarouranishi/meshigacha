@@ -26,8 +26,8 @@ class CafeService {
   }
 
   Future<List<Cafe>> fetchNearbyCafes(double latitude, double longitude, double radius) async {
-    final String url =
-        'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$latitude,$longitude&radius=$radius&type=cafe&key=$apiKey&language=ja';
+    // Replace the direct Google Maps API URL with your server-side proxy endpoint
+    final String url = 'https://your-server-domain/getNearbyCafes?location=$latitude,$longitude&radius=$radius';
 
     final response = await http.get(Uri.parse(url));
 
