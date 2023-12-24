@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:cafe_gacha/models/cafe.dart';
+import 'package:meshigacha/models/cafe.dart';
 
 class GachaHelper {
   static Cafe selectRandomCafe(List<Cafe> cafes) {
@@ -11,5 +11,3 @@ class GachaHelper {
     return cafes[randomIndex];
   }
 }
-
-

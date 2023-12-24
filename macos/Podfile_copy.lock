@@ -1,0 +1,126 @@
+PODS:
+  - cloud_functions (4.5.8):
+    - Firebase/CoreOnly (~> 10.18.0)
+    - Firebase/Functions (~> 10.18.0)
+    - firebase_core
+    - FlutterMacOS
+  - Firebase/CoreOnly (10.18.0):
+    - FirebaseCore (= 10.18.0)
+  - Firebase/Functions (10.18.0):
+    - Firebase/CoreOnly
+    - FirebaseFunctions (~> 10.18.0)
+  - firebase_core (2.24.2):
+    - Firebase/CoreOnly (~> 10.18.0)
+    - FlutterMacOS
+  - FirebaseAppCheckInterop (10.19.0)
+  - FirebaseAuthInterop (10.19.0)
+  - FirebaseCore (10.18.0):
+    - FirebaseCoreInternal (~> 10.0)
+    - GoogleUtilities/Environment (~> 7.12)
+    - GoogleUtilities/Logger (~> 7.12)
+  - FirebaseCoreExtension (10.19.0):
+    - FirebaseCore (~> 10.0)
+  - FirebaseCoreInternal (10.19.0):
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
+  - FirebaseFunctions (10.18.0):
+    - FirebaseAppCheckInterop (~> 10.10)
+    - FirebaseAuthInterop (~> 10.0)
+    - FirebaseCore (~> 10.0)
+    - FirebaseCoreExtension (~> 10.0)
+    - FirebaseMessagingInterop (~> 10.0)
+    - FirebaseSharedSwift (~> 10.0)
+    - GTMSessionFetcher/Core (< 4.0, >= 2.1)
+  - FirebaseMessagingInterop (10.19.0)
+  - FirebaseSharedSwift (10.19.0)
+  - FlutterMacOS (1.0.0)
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
+  - geolocator_apple (1.2.0):
+    - FlutterMacOS
+  - GoogleUtilities/Environment (7.12.0):
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleUtilities/Logger (7.12.0):
+    - GoogleUtilities/Environment
+  - "GoogleUtilities/NSData+zlib (7.12.0)"
+  - GTMSessionFetcher/Core (3.2.0)
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - PromisesObjC (2.3.1)
+  - sqflite (0.0.2):
+    - FlutterMacOS
+    - FMDB (>= 2.7.5)
+  - url_launcher_macos (0.0.1):
+    - FlutterMacOS
+
+DEPENDENCIES:
+  - cloud_functions (from `Flutter/ephemeral/.symlinks/plugins/cloud_functions/macos`)
+  - firebase_core (from `Flutter/ephemeral/.symlinks/plugins/firebase_core/macos`)
+  - FlutterMacOS (from `Flutter/ephemeral`)
+  - geolocator_apple (from `Flutter/ephemeral/.symlinks/plugins/geolocator_apple/macos`)
+  - path_provider_foundation (from `Flutter/ephemeral/.symlinks/plugins/path_provider_foundation/darwin`)
+  - sqflite (from `Flutter/ephemeral/.symlinks/plugins/sqflite/macos`)
+  - url_launcher_macos (from `Flutter/ephemeral/.symlinks/plugins/url_launcher_macos/macos`)
+
+SPEC REPOS:
+  trunk:
+    - Firebase
+    - FirebaseAppCheckInterop
+    - FirebaseAuthInterop
+    - FirebaseCore
+    - FirebaseCoreExtension
+    - FirebaseCoreInternal
+    - FirebaseFunctions
+    - FirebaseMessagingInterop
+    - FirebaseSharedSwift
+    - FMDB
+    - GoogleUtilities
+    - GTMSessionFetcher
+    - PromisesObjC
+
+EXTERNAL SOURCES:
+  cloud_functions:
+    :path: Flutter/ephemeral/.symlinks/plugins/cloud_functions/macos
+  firebase_core:
+    :path: Flutter/ephemeral/.symlinks/plugins/firebase_core/macos
+  FlutterMacOS:
+    :path: Flutter/ephemeral
+  geolocator_apple:
+    :path: Flutter/ephemeral/.symlinks/plugins/geolocator_apple/macos
+  path_provider_foundation:
+    :path: Flutter/ephemeral/.symlinks/plugins/path_provider_foundation/darwin
+  sqflite:
+    :path: Flutter/ephemeral/.symlinks/plugins/sqflite/macos
+  url_launcher_macos:
+    :path: Flutter/ephemeral/.symlinks/plugins/url_launcher_macos/macos
+
+SPEC CHECKSUMS:
+  cloud_functions: def946822e4927f0bcdfe78152fb8b2590fd74f3
+  Firebase: 414ad272f8d02dfbf12662a9d43f4bba9bec2a06
+  firebase_core: a74ee8b3ab5f91ae6b73f4913eaca996c24458b6
+  FirebaseAppCheckInterop: 37884781f3e16a1ba47e7ec80a1e805f987788e3
+  FirebaseAuthInterop: f90d6820bf6ecf44753b9f13ba941902d00b525a
+  FirebaseCore: 2322423314d92f946219c8791674d2f3345b598f
+  FirebaseCoreExtension: c08d14c7b22e07994e876d837e6f58642f340087
+  FirebaseCoreInternal: b444828ea7cfd594fca83046b95db98a2be4f290
+  FirebaseFunctions: b2565df59e28f00e070ff066bd61c2ce4da0e735
+  FirebaseMessagingInterop: ec84569ed0436f52280ca07a214a83f48674cf5c
+  FirebaseSharedSwift: f34eeb7d3ea87a34497629b6ca41657beadef76a
+  FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  geolocator_apple: 72a78ae3f3e4ec0db62117bd93e34523f5011d58
+<<<<<<< Updated upstream
+  path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
+=======
+  GoogleUtilities: 0759d1a57ebb953965c2dfe0ba4c82e95ccc2e34
+  GTMSessionFetcher: 41b9ef0b4c08a6db4b7eb51a21ae5183ec99a2c8
+  path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
+  PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
+>>>>>>> Stashed changes
+  sqflite: a5789cceda41d54d23f31d6de539d65bb14100ea
+  url_launcher_macos: d2691c7dd33ed713bf3544850a623080ec693d95
+
+PODFILE CHECKSUM: 353c8bcc5d5b0994e508d035b5431cfe18c1dea7
+
+COCOAPODS: 1.14.3

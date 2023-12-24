@@ -1,19 +1,23 @@
 import 'dart:async';
 import 'dart:math' as math; // Add this line
 import 'package:flutter/material.dart';
-import 'package:cafe_gacha/models/cafe.dart';
-import 'package:cafe_gacha/screens/cafe_info_screen.dart';
-import 'package:cafe_gacha/services/cafe_service.dart';
-import 'package:cafe_gacha/services/location_service.dart';
+import 'package:meshigacha/models/cafe.dart';
+import 'package:meshigacha/screens/cafe_info_screen.dart';
+import 'package:meshigacha/services/cafe_service.dart';
+import 'package:meshigacha/services/location_service.dart';
 import 'package:geolocator/geolocator.dart';
+
+import '../services/cafe_service.dart';
 
 class GachaAnimationScreen extends StatefulWidget {
   final double selectedDistance;
   final VoidCallback onNoCafesFound;
+  final String inputCategory;
 
-  GachaAnimationScreen({
+  const GachaAnimationScreen({
     required this.selectedDistance,
-    required this.onNoCafesFound, // Add this line
+    required this.onNoCafesFound,
+    required this.inputCategory, // Add this line
   });
 
   @override
@@ -38,6 +42,7 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen> {
         position.latitude,
         position.longitude,
         widget.selectedDistance,
+        widget.inputCategory,
       );
       Cafe? selectedCafe = chooseRandomCafe(cafes);
 
@@ -80,7 +85,7 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
       ),
-      body: Center(
+      body: const Center(
         child: CircularProgressIndicator(),
       ),
     );

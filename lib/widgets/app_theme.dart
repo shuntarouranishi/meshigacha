@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 final ThemeData appTheme = ThemeData(
   primarySwatch: Colors.brown,
-  textTheme: TextTheme(
+  textTheme: const TextTheme(
     headline1: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
     headline2: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
     bodyText1: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),

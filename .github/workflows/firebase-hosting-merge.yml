@@ -11,24 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
-      # Flutter SDKの手動セットアップ
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.10.6'
-
-      # 依存関係のインストール
-      - name: Install dependencies
-        run: flutter pub get
-
-      # Flutter Webアプリのビルド
-      - run: flutter build web
-
-      # Firebase Hostingへのデプロイ
+      - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_MARINE_ELEVATOR_383111 }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TORIMA_4A05C }}'
           channelId: live
-          projectId: marine-elevator-383111
+          projectId: torima-4a05c

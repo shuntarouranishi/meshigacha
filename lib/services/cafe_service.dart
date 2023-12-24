@@ -1,12 +1,27 @@
 import 'dart:convert';
 import 'dart:math' as math;
-import 'package:cafe_gacha/models/cafe.dart';
+import 'package:meshigacha/models/cafe.dart';
 import 'package:http/http.dart' as http;
+import 'package:cloud_functions/cloud_functions.dart';
+
+Map<String, dynamic> convertMap(Map<Object?, Object?> originalMap) {
+  final Map<String, dynamic> convertedMap = {};
+
+  originalMap.forEach((key, value) {
+    // キーがnullでないこと、そしてStringに変換可能であることを確認
+    if (key is String) {
+      convertedMap[key] = value;
+    } else {
+      // ここでキーがStringではない場合の処理を行う
+      // 例: エラーを投げる、ログに記録する、デフォルトのキーを使用する等
+      throw Exception('Key is not a string: $key');
+    }
+  });
+
+  return convertedMap;
+}
 
 class CafeService {
-  // Replace this with your actual API key
-  final String apiKey = 'AIzaSyCoKH96Lg4sS69iGY9LcMZ2EQ9scf8omds';
-
   double computeDistance(double lat1, double lon1, double lat2, double lon2) {
     const R = 6371e3; // Earth radius in meters
 
@@ -25,32 +40,43 @@ class CafeService {
     return R * c;
   }
 
-  Future<List<Cafe>> fetchNearbyCafes(double latitude, double longitude, double radius) async {
-    // Replace the direct Google Maps API URL with your server-side proxy endpoint
-    final String url = 'https://your-server-domain/getNearbyCafes?location=$latitude,$longitude&radius=$radius';
+  Future<List<Cafe>> fetchNearbyCafes(
+      double latitude,
+      double longitude,
+      double radius,
+      String inputCategory,
+      ) async {
+    final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable('fetchNearbyCafes');
+    final response = await callable.call(<String, dynamic>{
+      'latitude': latitude,
+      'longitude': longitude,
+      'radius': radius,
+      'inputCategory': inputCategory,
+    });
 
-    final response = await http.get(Uri.parse(url));
-
-    if (response.statusCode == 200) {
-      final List<dynamic> results = jsonDecode(response.body)['results'];
-
-      if (results.isEmpty) {
-        throw Exception('No cafes found');
-      }
-
-      final List<Cafe> cafes = results
-          .map((result) => Cafe.fromGooglePlaces(result, apiKey))
-          .toList();
-
-      // Assign computed distances to each cafe object
-      for (Cafe cafe in cafes) {
-        cafe.distance = computeDistance(latitude, longitude, cafe.latitude, cafe.longitude);
-      }
-
-      return cafes;
-    } else {
+    if (response.data == null) {
       throw Exception('Failed to fetch nearby cafes');
     }
-  }
 
+    final List<dynamic> results = response.data['cafes'];
+
+    final List<Cafe> cafes = results.map((result) {
+      // ここでMap<Object?, Object?>をMap<String, dynamic>に変換
+      if (result is Map<Object?, Object?>) {
+        final convertedResult = convertMap(result);
+        return Cafe.fromGooglePlaces(convertedResult);
+      } else {
+        throw Exception('Invalid data format');
+      }
+    }).where((cafe) => cafe.rating != null && cafe.rating >= 3.5) // 評価が3.5以上のカフェのみフィルタリング
+        .where((cafe) => cafe.maxprice != null && cafe.maxprice <= 4) // maxpriceが4以下の居酒屋のみフィルタリング
+        .toList();
+
+    // Assign computed distances to each cafe object
+    for (Cafe cafe in cafes) {
+      cafe.distance = computeDistance(latitude, longitude, cafe.latitude, cafe.longitude);
+    }
+
+    return cafes;
+  }
 }

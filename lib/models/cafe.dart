@@ -5,7 +5,10 @@ class Cafe {
   final double latitude;
   final double longitude;
   final List<String> photos;
-  double? distance; // Updated the 'distance' attribute to be nullable
+  double? distance;
+  final double rating;
+  final double maxprice;
+  // Updated the 'distance' attribute to be nullable
 
   Cafe({
     required this.id,
@@ -14,9 +17,11 @@ class Cafe {
     required this.latitude,
     required this.longitude,
     required this.photos,
+    required this.rating,
+    required this.maxprice
   });
 
-  factory Cafe.fromGooglePlaces(Map<String, dynamic> json, String apiKey) {
+  factory Cafe.fromGooglePlaces(Map<String, dynamic> json) {
     // Extract latitude and longitude
     final lat = json['geometry']['location']['lat'];
     final lng = json['geometry']['location']['lng'];
@@ -26,12 +31,14 @@ class Cafe {
         ? json['photos'][0]['photo_reference']
         : null;
 
+    final rating = json['rating'] != null ? json['rating'].toDouble() : null;
+    final maxprice = json['maxprice'] != null ? json['maxprice'].toDouble() : null;
+
     // Build photo URLs
     final List<String> photoUrls = [];
 
     if (photoRef != null) {
-      photoUrls.add(
-          photoRef); // Store only the photo reference, not the entire URL
+      photoUrls.add(photoRef); // Store only the photo reference
     }
 
     return Cafe(
@@ -41,6 +48,8 @@ class Cafe {
       latitude: lat,
       longitude: lng,
       photos: photoUrls,
+      rating: rating,
+      maxprice: maxprice ?? 3,
     );
   }
 }
