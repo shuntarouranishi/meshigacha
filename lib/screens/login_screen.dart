@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 import 'package:meshigacha/screens/welcome_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
+// 一番最初の画面
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -10,20 +14,56 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final Location location = Location();
+
+  Future<void> _requestPermission() async {
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
+
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return;
+      }
+    }
+
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+
+    // 位置情報の許可が得られたら、WelcomeScreenに遷移
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => WelcomeScreen()),
+    );
+  }
+
+  Future<Map<String, dynamic>> getLocationData() async {
+    final response = await http.get(Uri.parse('https://geolocation-db.com/json/'));
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      throw Exception('Failed to load location data');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:
-        const Text('IZAKAYA-ガチャ',
+        title: const Text('IZAKAYA-ガチャ',
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
             fontFamily: 'DelaGothicOne',
           ),
         ),
-        backgroundColor: const Color(0xFF7ED957),//0x＋FF＋7CD157
+        backgroundColor: const Color(0xFF7ED957),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -53,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
               height: 200, // Set the desired height
               child: Image.asset('images/izakaya-icon.jpg', fit: BoxFit.cover),
             ),
-            SizedBox(height: 5.0,),
+            const SizedBox(height: 5.0,),
             Container(
               child: const Text('IZAKAYA-ガチャはカジュアルな居酒屋選びを\nランダム性により、簡単に面白くしてくれます',
                 style: TextStyle(
@@ -63,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                 textAlign: TextAlign.center,
               ),
             ),
-            SizedBox(height: 60.0),
+            const SizedBox(height: 60.0),
             SizedBox(
               height: 60,
               width: 350,
@@ -75,10 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => WelcomeScreen()),
-                    );
+                    _requestPermission(); // 位置情報の許可を要求
                   },
                   child: const Text('はじめる',
                     style: TextStyle(
@@ -92,9 +129,9 @@ class _LoginPageState extends State<LoginPage> {
             Container(
               width: double.infinity,
               height: 70.0,
-              color: const Color(0xFFE4F4D0),//E4F4D0FF
+              color: const Color(0xFFE4F4D0),
               padding: const EdgeInsets.all(20.0),
-              child: Text('IZAKAYA-ガチャの２つの特徴',
+              child: const Text('IZAKAYA-ガチャの２つの特徴',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 13,
@@ -112,8 +149,8 @@ class _LoginPageState extends State<LoginPage> {
                     height: 100,
                     'images/entertainment-icon.jpg',
                   ),
-                  SizedBox(height: 8),
-                  Text(
+                  const SizedBox(height: 8),
+                  const Text(
                     'エンタメ性',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -122,8 +159,8 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 8),
-                  Text(
+                  const SizedBox(height: 8),
+                  const Text(
                     'お店選びが\nよりエンターテインメントになります',
                     style: TextStyle(
                       fontSize: 10.0,

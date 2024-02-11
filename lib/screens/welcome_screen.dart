@@ -4,6 +4,8 @@ import 'package:meshigacha/screens/gacha_animation_screen.dart';
 import 'package:meshigacha/services/cafe_service.dart';
 import 'package:meshigacha/services/location_service.dart';
 
+
+//ガチャを引く画面
 class WelcomeScreen extends StatefulWidget {
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();

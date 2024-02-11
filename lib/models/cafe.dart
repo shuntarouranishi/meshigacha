@@ -21,11 +21,37 @@ class Cafe {
     required this.maxprice
   });
 
+  factory Cafe.fromList(List<Object?> dataList) {
+    //if (dataList.length < expectedNumberOfElements || dataList.contains(null)) {
+    //throw Exception('Invalid or incomplete data in list');
+    // }
+
+    // Extracting data assuming a specific order in the list
+    final id = dataList[0] as String;
+    final name = dataList[1] as String;
+    final vicinity = dataList[2] as String;
+    final latitude = dataList[3] as double;
+    final longitude = dataList[4] as double;
+    final photos = dataList[5] as List<String>;
+    final rating = dataList[6] as double;
+    final maxprice = dataList[7] as double;
+
+    return Cafe(
+      id: id,
+      name: name,
+      vicinity: vicinity,
+      latitude: latitude,
+      longitude: longitude,
+      photos: photos,
+      rating: rating,
+      maxprice: maxprice ?? 3, // default value
+    );
+  }
+
   factory Cafe.fromGooglePlaces(Map<String, dynamic> json) {
     // Extract latitude and longitude
     final lat = json['geometry']['location']['lat'];
     final lng = json['geometry']['location']['lng'];
-
     // Extract photo reference if available
     final photoRef = json['photos'] != null
         ? json['photos'][0]['photo_reference']

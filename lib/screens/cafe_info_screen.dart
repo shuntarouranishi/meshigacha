@@ -6,6 +6,7 @@ import 'package:meshigacha/screens/welcome_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:cloud_functions/cloud_functions.dart';
 
+//ガチャの結果が出てくる画面
 class CafeInfoScreen extends StatelessWidget {
   final Cafe cafe;
   final double distance;
